@@ -3,8 +3,6 @@ package hw.hw002;
 public class B02_17f {
 
     public static double cos(double x, double eps) {
-        if (eps <= 0) throw new IllegalArgumentException("eps має бути > 0");
-
         double term = 1.0;
         double sum = 0.0;
         int k = 0;
