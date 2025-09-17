@@ -1,4 +1,4 @@
-//package hw.hw001;
+package hw.hw001;
 
 import java.util.Scanner;
 
@@ -14,4 +14,5 @@ class B01_01
 
         sc.close();
     }
+
 }
