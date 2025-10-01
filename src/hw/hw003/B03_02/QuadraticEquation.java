@@ -6,11 +6,44 @@ package hw.hw003.B03_02;
 public class QuadraticEquation {
     private double a, b, c;
 
+    public QuadraticEquation() {
+        this.a = this.b = this.c = 0;
+    }
+
     public QuadraticEquation(double a, double b, double c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
+
+    public QuadraticEquation(QuadraticEquation other){
+        this.a = other.a;
+        this.b = other.b;
+        this.c = other.c;
+    }
+
+
+    public QuadraticEquation copy(){
+        return new QuadraticEquation(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        QuadraticEquation other = (QuadraticEquation) obj;
+        return Double.compare(this.a, other.a) == 0 &&
+                Double.compare(this.b, other.b) == 0 &&
+                Double.compare(this.c, other.c) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(a, b, c);
+    }
+
+
 
     public Root getRoots() {
         if (a == 0) {
