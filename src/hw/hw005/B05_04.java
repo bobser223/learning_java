@@ -3,18 +3,22 @@ package hw.hw005;
 import java.io.*;
 import java.util.*;
 
-public class B05_03 {
+public class B05_04 {
     public static void main(String[] args) {
         getStudents( "students.csv");
+        b( "students.csv", "classes.csv" );
+        a( "students.csv", "9A", "9A.csv" );
     }
 
     public static List<List<String>> getStudents(String filename){
+        List<List<String>> students = new ArrayList<>();
         try{
             FileReader fr = new FileReader("src/hw/hw005/" + filename);
             BufferedReader br = new BufferedReader(fr);
             Scanner sc = new Scanner(br);
 
-            List<List<String>> students = new ArrayList<>();
+            String header = sc.nextLine();
+
             while (sc.hasNextLine()){
                 String line = sc.nextLine();
                 String[] fields = line.split(",");
@@ -31,7 +35,7 @@ public class B05_03 {
             System.out.println(e);
         }
 
-        return null;
+        return students;
     }
 
     public static List<List<String>> findStudentsFromClass(String filename, String className){
@@ -66,11 +70,11 @@ public class B05_03 {
         return dict;
     }
 
-    public static void filePrintFindStudentsFromClass(String inputFilename, String className, String outputFilename){
+    public static void a(String inputFilename, String className, String outputFilename){
         var students = findStudentsFromClass(inputFilename, className);
-        for (var student : students){
-            System.out.println(student);
-        }
+//        for (var student : students){
+//            System.out.println(student);
+//        }
 
 
         try {
@@ -79,7 +83,14 @@ public class B05_03 {
             PrintWriter pw = new PrintWriter(bw);
 
             for (var student : students){
-                pw.println(student.get(0) + "," + student.get(1));
+                boolean first = true;
+                for (int i = 0; i < student.size(); i++) {
+                    if (i == 2) continue; // пропускаємо клас
+                    if (!first) pw.print(",");
+                    pw.print(student.get(i));
+                    first = false;
+                }
+                pw.println();
             }
 
             pw.close();
@@ -92,11 +103,11 @@ public class B05_03 {
     }
 
 
-    public static void filePrintClassesCount(String inputFilename, String outputFilename){
+    public static void b(String inputFilename, String outputFilename){
         var dict = classesCount(inputFilename);
-        for (var key : dict.keySet()){
-            System.out.println(key + ": " + dict.get(key));
-        }
+//        for (var key : dict.keySet()){
+//            System.out.println(key + ": " + dict.get(key));
+//        }
 
 
         try {
