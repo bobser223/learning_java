@@ -1,0 +1,2 @@
+apple banana Apple orange banana ORANGE grape grape
+pear lemon apple lemon kiwi Kiwi kiwi
