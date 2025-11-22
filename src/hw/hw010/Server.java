@@ -30,7 +30,6 @@ public class Server {
 
             var writer = new PrintStream(connection.getOutputStream(), true, StandardCharsets.UTF_8);
 
-            int i = 1;
             while(true) {
                 String line = reader.readLine();
                 if (line == null) break;
@@ -43,7 +42,6 @@ public class Server {
                 writer.flush();
 
                 System.out.println("Sent: " + largestWord);
-                i++;
             }
 
 
