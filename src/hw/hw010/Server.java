@@ -37,10 +37,12 @@ public class Server {
 
                 System.out.println("Received: " + line);
 
-                writer.println(findLargestWord(line));
+                String largestWord = findLargestWord(line);
+
+                writer.println(largestWord);
                 writer.flush();
 
-                System.out.println("Sent: " + findLargestWord(line));
+                System.out.println("Sent: " + largestWord);
                 i++;
             }
 
