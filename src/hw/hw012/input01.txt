@@ -992,7 +992,7 @@
             obtain scholarship  1500 
             teach humanitarian     9 
                  teach natural     5 
-                    pay hostel   300 
+                    pay hostel   300
                    obtain help   200 
                  teach natural     6 
             teach humanitarian     2 

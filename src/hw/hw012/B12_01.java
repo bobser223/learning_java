@@ -6,12 +6,16 @@ import java.io.IOException;
 
 public class B12_01 {
     public static void main(String[] args) {
-        String filePath = (args.length > 0) ? args[0] : "src/hw/hw012/input01.txt";
-        try {
-            boolean hasDiploma = simulateStudent(filePath);
-            System.out.println(hasDiploma ? "YES" : "NO");
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to read input file: " + filePath, e);
+        String[] files = {"src/hw/hw012/input01.txt", "src/hw/hw012/input02.txt", "src/hw/hw012/input03.txt"};
+        for (String file : files) {
+//            String filePath = (args.length > 0) ? args[0] : "src/hw/hw012/input01.txt";
+            String filePath = file;
+            try {
+                boolean hasDiploma = simulateStudent(filePath);
+                System.out.println(hasDiploma ? "YES" : "NO");
+            } catch (IOException e) {
+                throw new RuntimeException("Unable to read input file: " + filePath, e);
+            }
         }
     }
 
