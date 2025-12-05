@@ -6,13 +6,18 @@ import java.io.IOException;
 
 public class B12_01 {
     public static void main(String[] args) {
-        String[] files = {"src/hw/hw012/input01.txt", "src/hw/hw012/input02.txt", "src/hw/hw012/input03.txt"};
+        String path = "src/hw/hw012/data/";
+        String[] files = {"input01.txt", "input02.txt", "input03.txt", "input04.txt", "input05.txt", "input06.txt",
+        "input07.txt", "input08.txt", "input09.txt", "input10.txt", "input11.txt", "input12.txt", "input13.txt",  "input14.txt"};
         for (String file : files) {
-//            String filePath = (args.length > 0) ? args[0] : "src/hw/hw012/input01.txt";
+            file = path + file;
             String filePath = file;
             try {
                 boolean hasDiploma = simulateStudent(filePath);
                 System.out.println(hasDiploma ? "YES" : "NO");
+            } catch (IllegalArgumentException e) {
+                System.err.println("Invalid data in " + filePath + ": " + e.getMessage());
+                System.out.println("NO");
             } catch (IOException e) {
                 throw new RuntimeException("Unable to read input file: " + filePath, e);
             }
@@ -36,8 +41,12 @@ public class B12_01 {
                 if (line.isEmpty()) {
                     continue;
                 }
-                StudentVisitor visitor = ActionParser.parse(line);
-                student.accept(visitor);
+                try {
+                    StudentVisitor visitor = ActionParser.parse(line);
+                    student.accept(visitor);
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Invalid action line: \"" + line + "\"", e);
+                }
             }
 
             return student.canGraduate();
@@ -45,11 +54,13 @@ public class B12_01 {
     }
 
     private static String requireLine(BufferedReader reader) throws IOException {
-        String line = reader.readLine();
-        if (line == null) {
-            throw new IllegalArgumentException("Unexpected end of file");
+        String line;
+        while ((line = reader.readLine()) != null) {
+            line = line.trim();
+            if (!line.isEmpty()) {
+                return line;
+            }
         }
-        return line.trim();
+        throw new IllegalArgumentException("Unexpected end of file");
     }
 }
-
